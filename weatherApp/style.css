@@ -1,0 +1,24 @@
+.mainContainer {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pictures {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgrey;
+}
