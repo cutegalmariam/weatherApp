@@ -1,30 +1,57 @@
+const searchInput = document.querySelector("#search");
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    console.log(searchInput.value);
+    search(searchInput.value);
+  }
+});
+
 let city;
-const searchBar = document.querySelector("#searchBar");
-function search() {
-  city = searchBar.value.trim();
+const searchValue = searchInput.value;
+function search(searchValue) {
+  city = searchValue.trim()
+  console.log(city);
   fetchWeatherData(city);
 }
+
+
+
 
 function fetchWeatherData(city) {
   let resp;
   const displayTemp = document.getElementById("displayTemp");
+  
+
   fetch(
     `http://api.weatherapi.com/v1/current.json?key=e00abaa4628542a8b9a121727232604&q=${city}&aqi=no
   `
   )
     .then((response) => {
       if (!response.ok) {
-        alert("weather response was not ok");
+        console.log("error ((");
+        var img = document.createElement("img");
+        img.src = "404.jpg";
+        img.width = 150;
+        img.height = 150;
+        imageContainer.innerHTML = "";
+        displayTemp.innerText =""
+        document.getElementById("not_found").appendChild(img);
       }
       return response.json();
     })
     .then((data) => {
+      
+      resp = city + " " + data.current.temp_c + " °C";
+      displayTemp.innerText = resp;
       if (data.current.temp_c > 10) {
         console.log("sunny ))");
         var img = document.createElement("img");
         img.src = "Sun.png";
         img.width = 150;
         img.height = 150;
+        imageContainer.innerHTML = "";
+        not_found.innerHTML = "";
         document.getElementById("imageContainer").appendChild(img);
       } else {
         console.log("cloudy ))");
@@ -32,10 +59,12 @@ function fetchWeatherData(city) {
         img.src = "cloud.png";
         img.width = 150;
         img.height = 150;
-
+        imageContainer.innerHTML = "";
+        not_found.innerHTML = "";
         document.getElementById("imageContainer").appendChild(img);
       }
-      resp = city + " " + data.current.temp_c + " °C";
-      displayTemp.innerText = resp;
-    });
+    })
+   
+   
 }
+  
