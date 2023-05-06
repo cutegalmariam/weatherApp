@@ -6,7 +6,14 @@ searchInput.addEventListener('keydown', (event) => {
     search(searchInput.value);
   }
 });
-
+searchInput.addEventListener('input', (event) =>{
+  if(searchInput.value === ""){
+    imageContainer.innerHTML = "";
+    displayTemp.innerText ="";
+    not_found.innerHTML = "";
+    console.log("grape kavtiko!");
+  }
+});
 let city;
 const searchValue = searchInput.value;
 function search(searchValue) {
@@ -14,8 +21,6 @@ function search(searchValue) {
   console.log(city);
   fetchWeatherData(city);
 }
-
-
 
 
 function fetchWeatherData(city) {
@@ -32,14 +37,18 @@ function fetchWeatherData(city) {
         console.log("error ((");
         var img = document.createElement("img");
         img.src = "404.jpg";
-        img.width = 150;
-        img.height = 150;
+        img.width = 250;
+        img.height = 250;
         imageContainer.innerHTML = "";
         displayTemp.innerText =""
+        not_found.innerHTML = "";
         document.getElementById("not_found").appendChild(img);
+        return;
       }
+      
       return response.json();
-    })
+    }
+    )
     .then((data) => {
       
       resp = city + " " + data.current.temp_c + " °C";
@@ -48,8 +57,8 @@ function fetchWeatherData(city) {
         console.log("sunny ))");
         var img = document.createElement("img");
         img.src = "Sun.png";
-        img.width = 150;
-        img.height = 150;
+        img.width = 250;
+        img.height = 250;
         imageContainer.innerHTML = "";
         not_found.innerHTML = "";
         document.getElementById("imageContainer").appendChild(img);
@@ -57,8 +66,8 @@ function fetchWeatherData(city) {
         console.log("cloudy ))");
         var img = document.createElement("img");
         img.src = "cloud.png";
-        img.width = 150;
-        img.height = 150;
+        img.width = 250;
+        img.height = 250;
         imageContainer.innerHTML = "";
         not_found.innerHTML = "";
         document.getElementById("imageContainer").appendChild(img);
